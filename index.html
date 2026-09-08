@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Предложение по трем AI-агентам | Антон Голоскоков</title>
+<meta name="description" content="Коммерческое предложение по разработке трех AI-агентов: разведчик недвижимости и инвесторов, контент-фабрика, публикатор объявлений.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#07100d;
+  --bg-2:#0b1714;
+  --surface:#0f1f1b;
+  --surface-2:#132723;
+  --line:#1e3b34;
+  --line-soft:#17302a;
+  --text:#e8f2ee;
+  --text-dim:#9fb5ae;
+  --text-mute:#6d857e;
+  --accent:#3ddc97;
+  --accent-dim:#1f9c6b;
+  --accent-glow:rgba(61,220,151,.14);
+  --warn:#e0b355;
+  --radius:14px;
+  --maxw:1120px;
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 600px at 12% -8%,rgba(61,220,151,.10),transparent 60%),
+    radial-gradient(760px 520px at 92% 4%,rgba(31,156,107,.09),transparent 62%);
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px;position:relative;z-index:1}
+h1,h2,h3,h4{line-height:1.2;margin:0;letter-spacing:-.02em}
+p{margin:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code,.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+
+/* ---------- hero ---------- */
+.hero{padding:88px 0 64px;border-bottom:1px solid var(--line-soft)}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);border:1px solid var(--line);background:var(--surface);
+  padding:7px 13px;border-radius:100px;margin-bottom:26px;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-glow)}
+.hero h1{font-size:clamp(31px,5.2vw,54px);font-weight:700;max-width:20ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lead{margin-top:22px;font-size:clamp(16px,2vw,18.5px);color:var(--text-dim);max-width:64ch}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chip{
+  border:1px solid var(--line);background:var(--surface);border-radius:100px;
+  padding:8px 15px;font-size:13.5px;color:var(--text-dim);
+}
+.chip b{color:var(--text);font-weight:600}
+
+/* ---------- sections ---------- */
+section{padding:72px 0;border-bottom:1px solid var(--line-soft)}
+.sec-head{margin-bottom:34px}
+.sec-num{font-size:12.5px;letter-spacing:.16em;color:var(--accent-dim);text-transform:uppercase;margin-bottom:11px;display:block}
+.sec-head h2{font-size:clamp(24px,3.4vw,34px);font-weight:600}
+.sec-head p{margin-top:13px;color:var(--text-dim);max-width:70ch}
+
+/* ---------- cards ---------- */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:860px){.g2,.g3{grid-template-columns:1fr}}
+.card{
+  background:linear-gradient(180deg,var(--surface),var(--bg-2));
+  border:1px solid var(--line-soft);border-radius:var(--radius);padding:24px;
+  transition:border-color .25s ease,transform .25s ease;
+}
+.card:hover{border-color:var(--line);transform:translateY(-2px)}
+.card h3{font-size:17.5px;font-weight:600;margin-bottom:9px}
+.card p{color:var(--text-dim);font-size:14.8px}
+.card .metrics{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.metric{
+  font-family:"JetBrains Mono",monospace;font-size:12.2px;
+  background:rgba(61,220,151,.07);border:1px solid rgba(61,220,151,.2);
+  color:var(--accent);padding:4px 9px;border-radius:6px;
+}
+.card .src{margin-top:14px;font-size:13px;color:var(--text-mute)}
+.card .src a{color:var(--text-dim);border-bottom:1px solid var(--line)}
+.card .src a:hover{color:var(--accent);text-decoration:none}
+
+/* ---------- configurator ---------- */
+.proj{
+  border:1px solid var(--line-soft);border-radius:var(--radius);
+  background:var(--bg-2);overflow:hidden;margin-bottom:20px;
+}
+.proj-head{
+  display:flex;flex-wrap:wrap;gap:14px;align-items:baseline;justify-content:space-between;
+  padding:22px 24px;background:var(--surface);border-bottom:1px solid var(--line-soft);
+}
+.proj-head h3{font-size:19px;font-weight:600}
+.proj-head .sub{color:var(--text-mute);font-size:13.6px;margin-top:5px}
+.proj-total{font-family:"JetBrains Mono",monospace;font-size:13.4px;color:var(--text-dim);white-space:nowrap}
+.proj-total b{color:var(--accent);font-weight:500}
+.stages{padding:9px}
+.stage{
+  display:grid;grid-template-columns:auto 1fr auto;gap:15px;align-items:start;
+  padding:16px 15px;border-radius:11px;cursor:pointer;
+  transition:background .18s ease;border:1px solid transparent;
+}
+.stage:hover{background:var(--surface)}
+.stage.on{background:rgba(61,220,151,.055);border-color:rgba(61,220,151,.24)}
+.box{
+  width:21px;height:21px;border-radius:6px;border:1.5px solid var(--line);
+  background:var(--bg);margin-top:2px;flex:none;position:relative;transition:all .18s ease;
+}
+.stage.on .box{background:var(--accent);border-color:var(--accent)}
+.box::after{
+  content:"";position:absolute;left:6.5px;top:2.5px;width:5px;height:10px;
+  border:solid #06110d;border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);
+  transition:transform .18s cubic-bezier(.3,1.4,.5,1);
+}
+.stage.on .box::after{transform:rotate(45deg) scale(1)}
+.stage-body h4{font-size:15.4px;font-weight:600;margin-bottom:5px}
+.stage-body p{font-size:14px;color:var(--text-dim)}
+.stage-price{text-align:right;font-family:"JetBrains Mono",monospace;white-space:nowrap}
+.stage-price .eur{font-size:15.4px;color:var(--text);font-weight:500}
+.stage-price .rub{font-size:12.4px;color:var(--text-mute);margin-top:3px}
+.stage-price .term{font-size:12.2px;color:var(--accent-dim);margin-top:5px}
+@media(max-width:640px){
+  .stage{grid-template-columns:auto 1fr;gap:12px}
+  .stage-price{grid-column:2;text-align:left;margin-top:8px;display:flex;gap:12px;align-items:baseline}
+  .stage-price .rub,.stage-price .term{margin-top:0}
+}
+
+/* ---------- sticky bar ---------- */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:rgba(9,20,17,.93);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);
+  transform:translateY(102%);transition:transform .34s cubic-bezier(.4,0,.2,1);
+}
+.bar.show{transform:translateY(0)}
+.bar-in{
+  max-width:var(--maxw);margin:0 auto;padding:14px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+}
+.bar-nums{display:flex;gap:26px;align-items:baseline;flex-wrap:wrap}
+.bar-lab{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);display:block;margin-bottom:3px}
+.bar-val{font-family:"JetBrains Mono",monospace;font-size:20px;color:var(--accent);font-weight:500}
+.bar-val small{font-size:13px;color:var(--text-dim);font-weight:400}
+.bar-btn{
+  background:var(--accent);color:#06110d;font-weight:600;font-size:14.6px;
+  padding:12px 22px;border-radius:10px;border:0;cursor:pointer;
+  transition:filter .2s ease,transform .2s ease;
+}
+.bar-btn:hover{filter:brightness(1.08);transform:translateY(-1px);text-decoration:none}
+@media(max-width:640px){.bar-in{padding:12px 16px}.bar-val{font-size:17px}.bar-nums{gap:16px}}
+
+/* ---------- flow ---------- */
+.flow{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-top:16px}
+.node{
+  font-family:"JetBrains Mono",monospace;font-size:12.4px;
+  background:var(--surface-2);border:1px solid var(--line);
+  padding:7px 12px;border-radius:8px;color:var(--text-dim);
+}
+.node.hl{border-color:rgba(61,220,151,.4);color:var(--accent);background:rgba(61,220,151,.07)}
+.arr{color:var(--accent-dim);font-size:13px}
+
+/* ---------- list ---------- */
+.list{list-style:none;padding:0;margin:0}
+.list li{
+  padding:13px 0 13px 27px;position:relative;color:var(--text-dim);
+  font-size:15px;border-bottom:1px solid var(--line-soft);
+}
+.list li:last-child{border-bottom:0}
+.list li::before{
+  content:"";position:absolute;left:4px;top:21px;width:7px;height:7px;
+  border-radius:2px;background:var(--accent-dim);
+}
+.list li b{color:var(--text);font-weight:600}
+
+/* ---------- table ---------- */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line-soft);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;font-size:14.4px;min-width:560px}
+th{
+  text-align:left;padding:14px 17px;background:var(--surface);
+  font-weight:600;font-size:12.6px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-mute);
+  border-bottom:1px solid var(--line-soft);
+}
+td{padding:14px 17px;border-bottom:1px solid var(--line-soft);color:var(--text-dim);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td b{color:var(--text);font-weight:600}
+
+/* ---------- note ---------- */
+.note{
+  border-left:2px solid var(--accent-dim);background:var(--surface);
+  padding:17px 20px;border-radius:0 11px 11px 0;color:var(--text-dim);font-size:14.8px;margin-top:20px;
+}
+.note b{color:var(--text)}
+
+/* ---------- steps ---------- */
+.steps{counter-reset:s;display:grid;gap:14px}
+.step{
+  display:grid;grid-template-columns:auto 1fr;gap:17px;align-items:start;
+  background:var(--bg-2);border:1px solid var(--line-soft);border-radius:var(--radius);padding:20px 22px;
+}
+.step::before{
+  counter-increment:s;content:counter(s);
+  font-family:"JetBrains Mono",monospace;font-size:14px;font-weight:500;
+  width:31px;height:31px;display:grid;place-items:center;flex:none;
+  border-radius:9px;background:rgba(61,220,151,.09);border:1px solid rgba(61,220,151,.26);color:var(--accent);
+}
+.step h4{font-size:16px;font-weight:600;margin-bottom:5px}
+.step p{color:var(--text-dim);font-size:14.6px}
+
+/* ---------- footer ---------- */
+footer{padding:64px 0 120px}
+.cta{
+  background:linear-gradient(150deg,var(--surface),var(--bg-2));
+  border:1px solid var(--line);border-radius:18px;padding:38px 34px;
+}
+.cta h2{font-size:clamp(21px,3vw,29px);font-weight:600;margin-bottom:13px}
+.cta p{color:var(--text-dim);max-width:60ch}
+.cta-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  display:inline-block;padding:13px 24px;border-radius:11px;font-weight:600;font-size:14.8px;
+  background:var(--accent);color:#06110d;transition:filter .2s ease,transform .2s ease;
+}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px);text-decoration:none}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.foot-note{margin-top:30px;color:var(--text-mute);font-size:13.4px}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span> Предложение от 9 сентября 2026</span>
+    <h1>Три AI-агента: <em>разведка, коммуникация и контент</em> на одном стеке</h1>
+    <p class="lead">
+      Антон Голоскоков, инженер AI-автоматизации. Ниже разбор всех трех технических заданий:
+      архитектура, технологии, сроки и цена по каждому этапу. Отметьте нужные этапы галочками,
+      итоговая сумма посчитается внизу страницы.
+    </p>
+    <div class="hero-meta">
+      <span class="chip"><b>n8n</b> self-hosted</span>
+      <span class="chip"><b>Claude API</b> как мозг агентов</span>
+      <span class="chip"><b>PostgreSQL</b> + вектор</span>
+      <span class="chip">Хостинг в <b>ЕС</b>, GDPR</span>
+      <span class="chip">Оплата <b>по этапам</b></span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ОПЫТ ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">01 / Опыт</span>
+      <h2>Что уже построено и работает</h2>
+      <p>
+        Системы такого же типа, как в ваших ТЗ: поиск и обогащение данных, скоринг, переписка,
+        человек в цикле, ежедневная отчетность в Telegram. Код открыт, можно посмотреть.
+      </p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card rv">
+        <h3>AI Outreach Machine</h3>
+        <p>
+          End-to-end система B2B-лидогенерации из семи воркеров на n8n. Поиск компаний,
+          обогащение и скоринг, генерация персональных писем через Claude API со structured JSON,
+          отправка через SMTP с retry-логикой, мониторинг ответов по IMAP и AI-классификация
+          с оценкой уверенности, follow-up, suppression list для соблюдения правил.
+        </p>
+        <div class="metrics">
+          <span class="metric">7 воркеров</span>
+          <span class="metric">1000+ лидов</span>
+          <span class="metric">57+ писем</span>
+          <span class="metric">Claude API</span>
+        </div>
+        <p class="src">Код: <a href="https://github.com/penkayone/ai-outreach-machine" target="_blank" rel="noopener">github.com/penkayone/ai-outreach-machine</a></p>
+      </div>
+
+      <div class="card rv">
+        <h3>Четыре production-workflow в портфолио</h3>
+        <p>
+          Lead Intelligence: 16 нод, три AI-вызова, скоринг лида по 12 факторам и четырехуровневая
+          маршрутизация по приоритетам. Competitive Intelligence: RSS-агрегация, NLP с весами
+          ключевых слов, fuzzy-дедупликация, AI-анализ трендов. Support Bot: классификация по
+          7 категориям, 4 уровня срочности, sentiment-анализ, SLA-матрица. Company Research:
+          детект более 40 технологий через DNS API и парсинг HTML.
+        </p>
+        <div class="metrics">
+          <span class="metric">62 ноды</span>
+          <span class="metric">9 AI-вызовов</span>
+          <span class="metric">4 паттерна</span>
+        </div>
+        <p class="src">Код: <a href="https://github.com/penkayone/n8n-automation-portfolio" target="_blank" rel="noopener">github.com/penkayone/n8n-automation-portfolio</a></p>
+      </div>
+
+      <div class="card rv">
+        <h3>Три Telegram-бота в работе круглосуточно</h3>
+        <p>
+          JobScout мониторит каналы, отбирает подходящее через AI и присылает карточки с кнопками
+          действия, отдельный воркфлоу обрабатывает нажатия и обновляет статусы. Это ровно тот
+          механизм human-in-the-loop, который нужен в модуле коммуникации.
+          InfoScout читает профильные каналы и раз в сутки присылает сводку только с полезным.
+          Планер дня формирует утренний план из базы знаний.
+        </p>
+        <div class="metrics">
+          <span class="metric">24/7 в проде</span>
+          <span class="metric">кнопки действий</span>
+          <span class="metric">ежедневный дайджест</span>
+        </div>
+        <p class="src">Код и схемы потоков: <a href="https://github.com/penkayone/n8n-telegram-automations" target="_blank" rel="noopener">github.com/penkayone/n8n-telegram-automations</a></p>
+      </div>
+
+      <div class="card rv">
+        <h3>Автоматизация и technical SEO на коммерческих проектах</h3>
+        <p>
+          Для агентства в multi-GEO среде собрал автоматический сбор позиций на n8n: обход по
+          расписанию, нормализация данных, отчеты в Google Sheets как дашборд. Заменил ручную
+          проверку, которая занимала часы в неделю. Для клиента в ЕС на ежемесячном ретейнере
+          восстановил индексацию после блокировки поискового бота на Cloudflare, подготовил план
+          из 24 задач и стратегию на 6 месяцев. Работаю с этим клиентом без пропусков.
+        </p>
+        <div class="metrics">
+          <span class="metric">multi-GEO</span>
+          <span class="metric">ретейнер</span>
+          <span class="metric">4 языка</span>
+        </div>
+        <p class="src">Названия компаний не раскрываю по договоренности с заказчиками.</p>
+      </div>
+    </div>
+
+    <div class="note rv">
+      <b>Отдельно к контент-проекту:</b> веду свой YouTube-канал на 5 тысяч подписчиков, делаю
+      монтаж, AI-озвучку через ElevenLabs, AI-видео через Sora и Runway, работаю с транскрипцией
+      через Whisper. Это ровно тот стек, который нужен для контент-фабрики.
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЧТО ДЕЛАЕМ ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">02 / Состав и цена</span>
+      <h2>Отметьте, что берем в работу</h2>
+      <p>
+        Каждый этап это отдельный законченный блок с приемкой и оплатой. Можно начать с одного
+        этапа и остановиться, если результат не устроит. При выборе позднего этапа предыдущие
+        отмечаются автоматически: они технически необходимы.
+        Курс пересчета 1 евро = 100 рублей по курсу ЦБ на 9 сентября 2026.
+      </p>
+    </div>
+    <div id="cfg"></div>
+  </div>
+</section>
+
+<!-- ============ АРХИТЕКТУРА ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">03 / Архитектура</span>
+      <h2>Как это работает внутри</h2>
+      <p>
+        Общий принцип для всех трех систем: тяжелые операции идут по расписанию отдельными
+        воркерами, быстрые реакции обрабатываются своим циклом, состояние хранится в базе,
+        поэтому повторов и потерь не бывает. Каждый шаг агента логируется.
+      </p>
+    </div>
+
+    <div class="grid g3">
+      <div class="card rv">
+        <h3>Разведчик</h3>
+        <p>
+          Планировщик поднимает воркеры по источникам. Объекты и люди проходят дедупликацию,
+          обогащение и скоринг по вашим критериям, попадают в единую базу. Диалоговый агент ведет
+          переписку по чек-листу и не передает контакт, пока не собраны все ответы. Готовые пары
+          объект-инвестор и назначенные встречи уходят в Telegram и календарь.
+        </p>
+        <div class="flow">
+          <span class="node">Расписание</span><span class="arr">&rarr;</span>
+          <span class="node">Сбор</span><span class="arr">&rarr;</span>
+          <span class="node">Дедуп</span><span class="arr">&rarr;</span>
+          <span class="node hl">Скоринг</span><span class="arr">&rarr;</span>
+          <span class="node">База</span><span class="arr">&rarr;</span>
+          <span class="node hl">Диалог</span><span class="arr">&rarr;</span>
+          <span class="node">Отчет 08:00</span>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <h3>Content Maker</h3>
+        <p>
+          Загруженные материалы расшифровываются и режутся на смысловые единицы с разметкой по
+          теме и уровню. Разведка конкурентов ежедневно обновляет банк рабочих приемов. Генератор
+          собирает пост из смысла, приема и голоса персонажа, делает 3-5 вариантов. Аналитик
+          снимает метрики через 24 и 72 часа, ставит эксперименты и меняет правила генерации.
+        </p>
+        <div class="flow">
+          <span class="node">Загрузка</span><span class="arr">&rarr;</span>
+          <span class="node">Whisper</span><span class="arr">&rarr;</span>
+          <span class="node">База знаний</span><span class="arr">&rarr;</span>
+          <span class="node hl">Генератор</span><span class="arr">&rarr;</span>
+          <span class="node">Очередь</span><span class="arr">&rarr;</span>
+          <span class="node">API сетей</span><span class="arr">&rarr;</span>
+          <span class="node hl">Аналитик</span>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <h3>Публикатор объявлений</h3>
+        <p>
+          Объявление хранится в одном месте и адаптируется под формат каждой площадки. Публикация
+          идет по очереди с интервалами, каждая попытка получает статус: размещено, на модерации,
+          отклонено с причиной, ошибка. Отдельный воркер собирает активность под размещенными
+          объявлениями и ищет новые тематические группы.
+        </p>
+        <div class="flow">
+          <span class="node">Карточка</span><span class="arr">&rarr;</span>
+          <span class="node">Адаптация</span><span class="arr">&rarr;</span>
+          <span class="node hl">Очередь</span><span class="arr">&rarr;</span>
+          <span class="node">Публикация</span><span class="arr">&rarr;</span>
+          <span class="node">Статусы</span><span class="arr">&rarr;</span>
+          <span class="node hl">Отчет</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ТЕХНОЛОГИИ ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">04 / Технологии</span>
+      <h2>На чем собираю</h2>
+      <p>Стек совпадает с тем, что вы указали в ТЗ как ориентир, и с тем, на чем я работаю каждый день.</p>
+    </div>
+    <div class="tbl-wrap rv">
+      <table>
+        <thead><tr><th>Слой</th><th>Решение</th><th>Зачем именно так</th></tr></thead>
+        <tbody>
+          <tr><td><b>Оркестрация</b></td><td>n8n, self-hosted</td><td>Все шаги видно глазами, вы можете открыть и понять логику без программиста</td></tr>
+          <tr><td><b>Мозг агентов</b></td><td>Claude API, structured JSON</td><td>Ответ приходит строго заданной структурой, а не свободным текстом, поэтому не ломает пайплайн</td></tr>
+          <tr><td><b>Расшифровка</b></td><td>Whisper</td><td>Лекции и видео превращаются в текст для базы знаний</td></tr>
+          <tr><td><b>База</b></td><td>PostgreSQL с векторным расширением</td><td>Хранение объектов, контактов, переписки и семантический матчинг объект-инвестор</td></tr>
+          <tr><td><b>Аватар и голос</b></td><td>HeyGen или Synthesia, ElevenLabs</td><td>Сравню на тестовом ролике до этапа 1 и выберу по качеству и цене</td></tr>
+          <tr><td><b>Сборка видео</b></td><td>FFmpeg или Creatomate</td><td>Автоматическая нарезка под вертикаль 9:16 и длинный формат</td></tr>
+          <tr><td><b>Интерфейс</b></td><td>Telegram-бот плюс веб-дашборд</td><td>Управление с телефона, детальная аналитика в браузере</td></tr>
+          <tr><td><b>Инфраструктура</b></td><td>Docker Compose, VPS в ЕС, Grafana</td><td>Хранение данных в ЕС, мониторинг работоспособности, секреты в переменных окружения</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ОГРАНИЧЕНИЯ ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">05 / Ограничения площадок</span>
+      <h2>Что можно автоматически, а что через подтверждение</h2>
+      <p>
+        Вы спрашивали про ограничения Facebook, Telegram, Instagram и других платформ.
+        Разделяю по факту: где есть официальный интерфейс, все идет полностью само,
+        где его нет, система готовит пакет и человек отправляет одной кнопкой.
+      </p>
+    </div>
+    <div class="tbl-wrap rv">
+      <table>
+        <thead><tr><th>Площадка</th><th>Что доступно</th><th>Режим работы</th></tr></thead>
+        <tbody>
+          <tr><td><b>Instagram</b></td><td>Content Publishing API для бизнес-аккаунта, фото, карусели, Reels</td><td>Автоматически, до 50 публикаций в сутки на аккаунт</td></tr>
+          <tr><td><b>Facebook</b></td><td>Публикация на своей Странице через Pages API. Постинг в группы третьих лиц через официальный интерфейс закрыт с 2020 года</td><td>Свои Страницы и группы с правами администратора автоматически, остальные через подтверждение человеком</td></tr>
+          <tr><td><b>Telegram</b></td><td>Bot API: каналы и группы, где бот добавлен администратором</td><td>Автоматически. В чужие группы бот сам не вступает, нужен доступ от администратора</td></tr>
+          <tr><td><b>TikTok</b></td><td>Content Posting API, требуется ревью приложения перед запуском</td><td>Автоматически после одобрения, закладываю время на ревью в этап</td></tr>
+          <tr><td><b>YouTube</b></td><td>Data API v3, дневная квота 10 000 единиц, загрузка ролика стоит 1600</td><td>До 6 роликов в сутки на проект, при необходимости расширяю квоту запросом</td></tr>
+          <tr><td><b>Порталы недвижимости</b></td><td>У части есть официальные API и фиды по подписке, у части нет</td><td>Где есть, автоматически. Где нет, черновик и отправка в один клик</td></tr>
+          <tr><td><b>Маркировка ИИ-контента</b></td><td>Instagram, TikTok и YouTube требуют помечать синтетический контент</td><td>Проставляется автоматически при загрузке, это встроенная функция площадок</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note rv">
+      <b>Как это заложено в архитектуру:</b> каждая площадка подключается отдельным адаптером
+      с собственными лимитами и интервалами. Добавление новой площадки не требует переписывания
+      ядра, это отдельный модуль. Режим подтверждения включается и выключается переключателем
+      по каждой рубрике, без участия разработчика.
+    </div>
+  </div>
+</section>
+
+<!-- ============ ПОРЯДОК ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">06 / Порядок работ</span>
+      <h2>С чего рекомендую начать</h2>
+      <p>Три системы одновременно вести нельзя без потери качества. Предлагаю такую очередность.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv">
+        <div>
+          <h4>Разведчик, этап 1</h4>
+          <p>
+            Ближе всего к вашим деньгам: одна страна, три источника, база объектов и ежедневный
+            отчет в Telegram. Через 3-4 недели вы видите живой поток объектов и понимаете,
+            стоит ли расширять. Это самая дешевая проверка всей идеи.
+          </p>
+        </div>
+      </div>
+      <div class="step rv">
+        <div>
+          <h4>Публикатор объявлений</h4>
+          <p>
+            Логично следующим: объекты уже собираются, значит их можно сразу разгонять по
+            площадкам и получать входящие заявки. Работает на том же ядре, что и разведчик.
+          </p>
+        </div>
+      </div>
+      <div class="step rv">
+        <div>
+          <h4>Content Maker</h4>
+          <p>
+            Самый длинный проект и единственный, который требует ваших решений до старта:
+            библия персонажа, права на исходные материалы, целевая аудитория. Пока идут первые
+            два, эти вопросы можно спокойно закрыть, и третий стартует без простоя.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ УСЛОВИЯ ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">07 / Условия</span>
+      <h2>Как работаем</h2>
+    </div>
+    <div class="grid g2">
+      <div class="card rv">
+        <h3>Оплата и приемка</h3>
+        <ul class="list">
+          <li><b>Поэтапно.</b> Каждый этап оплачивается отдельно, следующий стартует после приемки предыдущего</li>
+          <li><b>Без предоплаты за весь объем.</b> Вы не замораживаете бюджет на полгода вперед</li>
+          <li><b>Остановка в любой момент.</b> Все сделанное остается у вас: код, доступы, данные</li>
+          <li><b>Валюта.</b> Евро или рубли по курсу ЦБ на дату оплаты</li>
+        </ul>
+      </div>
+      <div class="card rv">
+        <h3>Что вы получаете на каждом этапе</h3>
+        <ul class="list">
+          <li>Работающая система на боевом сервере</li>
+          <li>Исходный код в репозитории, доступ у вас</li>
+          <li>Админ-панель: фильтры, шаблоны, источники, расписание, watchlist, все правится без программиста</li>
+          <li>Документация и видео-инструкция</li>
+        </ul>
+      </div>
+      <div class="card rv">
+        <h3>Поддержка</h3>
+        <ul class="list">
+          <li><b>1 месяц по ТЗ.</b> Входит в стоимость, как вы и указали</li>
+          <li><b>Плюс 1 месяц от меня.</b> Бесплатно, сверх ТЗ</li>
+          <li>В поддержку входит поддержание работоспособности: исправление сбоев, реакция на изменения площадок, консультации</li>
+          <li>Разработка новых функций в поддержку не входит и считается отдельно</li>
+        </ul>
+      </div>
+      <div class="card rv">
+        <h3>Расходы на сервисы</h3>
+        <ul class="list">
+          <li>Оплачиваются вами напрямую, на ваши аккаунты и вашу карту</li>
+          <li>Сюда входят API моделей, хостинг, аватар и озвучка, подписки на порталы и базы</li>
+          <li>Ориентир из вашего же ТЗ: 300-900 евро в месяц в зависимости от объема</li>
+          <li><b>Почему так:</b> доступы остаются вашими, вы видите реальный расход и не переплачиваете мне за посредничество</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<footer>
+  <div class="wrap">
+    <div class="cta rv">
+      <h2>Готов стартовать</h2>
+      <p>
+        Отметьте этапы выше и напишите мне, какой набор интересует. По первому этапу могу
+        подготовить детальный план работ и приступить сразу после согласования.
+        Если какие-то пункты ТЗ хочется обсудить или поменять, это нормально, разберем на созвоне.
+      </p>
+      <div class="cta-links">
+        <a class="btn" href="https://t.me/antongoloskokov" target="_blank" rel="noopener">Написать в Telegram</a>
+        <a class="btn ghost" href="mailto:An.goloskokov@gmail.com">An.goloskokov@gmail.com</a>
+        <a class="btn ghost" href="https://github.com/penkayone" target="_blank" rel="noopener">Код на GitHub</a>
+      </div>
+      <p class="foot-note">
+        Антон Голоскоков, инженер AI-автоматизации. Предложение действительно 30 дней с 9 сентября 2026.
+        Сроки указаны при полной занятости на проекте.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ STICKY BAR ============ -->
+<div class="bar" id="bar">
+  <div class="bar-in">
+    <div class="bar-nums">
+      <div>
+        <span class="bar-lab">Выбрано этапов</span>
+        <span class="bar-val" id="cnt">0</span>
+      </div>
+      <div>
+        <span class="bar-lab">Стоимость</span>
+        <span class="bar-val" id="sum">0 &euro; <small id="sumRub">0 &#8381;</small></span>
+      </div>
+      <div>
+        <span class="bar-lab">Срок</span>
+        <span class="bar-val" id="term">&mdash;</span>
+      </div>
+    </div>
+    <a class="bar-btn" id="cta" href="https://t.me/antongoloskokov" target="_blank" rel="noopener">Обсудить выбранное</a>
+  </div>
+</div>
+
+<script>
+const RATE = 100;
+const DATA = [
+  {
+    id:"scout",
+    name:"Разведчик: недвижимость и инвесторы",
+    sub:"Поиск объектов, инвесторов и агентств, квалификация в диалоге, расширение источников",
+    stages:[
+      {t:"Этап 1. MVP",  d:"Одна страна, три источника объектов, база объектов, дедупликация и скоринг, ежедневный отчет в Telegram. Без автоматической переписки.", p:3200, w:[3,4]},
+      {t:"Этап 2. Инвесторы и агентства", d:"Модуль поиска инвесторов и покупателей, карточки, сбор баз риэлторов и брокеров, семантический матчинг объект-инвестор.", p:3000, w:[3,4]},
+      {t:"Этап 3. Коммуникация и квалификация", d:"Диалоговый агент по сценарию, чек-листы по инвестору и по объекту, подтверждение отправки человеком, постановка встреч в Google Calendar.", p:3400, w:[4,4]},
+      {t:"Этап 4. Разведка новых источников", d:"Watchlist персон, разбор комментариев под постами, поиск новых групп, платформ и агентств, автоподключение одобренных источников.", p:2600, w:[3,3]},
+      {t:"Этап 5. Масштаб", d:"Новые страны и языки, аналитика конверсии по источникам: какая группа и персона реально приносят сделки. Объем уточняется по итогам этапов 1-4.", p:2000, w:[2,4]}
+    ]
+  },
+  {
+    id:"content",
+    name:"Content Maker: цифровой персонаж",
+    sub:"Контент-фабрика на Instagram, TikTok и YouTube с петлей самообучения",
+    stages:[
+      {t:"Этап 1. Персонаж и библиотека", d:"Библия персонажа, аватар и голос, загрузка первых материалов, расшифровка и разбор на смысловые единицы, база знаний.", p:2400, w:[2,3]},
+      {t:"Этап 2. Разведка и генерация", d:"Отслеживание аккаунтов ниши, выявление постов-выбросов и разбор причин, банк рабочих приемов, генератор с 3-5 вариантами на идею.", p:3200, w:[3,4]},
+      {t:"Этап 3. Автопубликация", d:"Подключение официальных API трех сетей, расписание по активности аудитории, очередь на 7 дней вперед, режим предпросмотра по рубрикам.", p:2400, w:[2,3]},
+      {t:"Этап 4. Аналитик и петля обучения", d:"Съем метрик через 24 и 72 часа, разбор по ступеням воронки, гипотезы и эксперименты, автоматическое обновление правил генерации, режим кризис-менеджера.", p:3000, w:[3,4]},
+      {t:"Этап 5. Масштаб", d:"Второй язык, второй персонаж, воронка из подписчиков в клиентов. Объем уточняется по итогам предыдущих этапов.", p:1800, w:[2,4]}
+    ]
+  },
+  {
+    id:"poster",
+    name:"Публикатор объявлений",
+    sub:"Размещение объявлений по базе площадок, контроль модерации, ежедневный отчет",
+    stages:[
+      {t:"Этап 1. База площадок и ядро публикации", d:"Единая карточка объявления, адаптация под формат каждой площадки, очередь с интервалами, адаптеры под сайты, Telegram и подключенные аккаунты соцсетей.", p:2400, w:[2,3]},
+      {t:"Этап 2. Контроль и учет", d:"Статусы по каждой попытке: размещено, на модерации, отклонено с причиной, ошибка. Учет всех публикаций, сбор активности под объявлениями: реакции, комментарии, отклики.", p:1800, w:[2,2]},
+      {t:"Этап 3. Разведка групп и отчет", d:"Ежедневный поиск новых тематических групп и сообществ по ключевым словам, отбор по активности и тематике, рекомендация вступить или пропустить, утренний отчет.", p:1400, w:[1,2]}
+    ]
+  }
+];
+
+const fmt = n => n.toLocaleString("ru-RU");
+const root = document.getElementById("cfg");
+
+DATA.forEach(proj => {
+  const box = document.createElement("div");
+  box.className = "proj rv";
+  box.innerHTML =
+    '<div class="proj-head">' +
+      '<div><h3>' + proj.name + '</h3><div class="sub">' + proj.sub + '</div></div>' +
+      '<div class="proj-total" data-total="' + proj.id + '">не выбрано</div>' +
+    '</div><div class="stages"></div>';
+  const list = box.querySelector(".stages");
+
+  proj.stages.forEach((s, i) => {
+    const el = document.createElement("div");
+    el.className = "stage";
+    el.dataset.proj = proj.id;
+    el.dataset.idx = i;
+    el.dataset.price = s.p;
+    el.dataset.wmin = s.w[0];
+    el.dataset.wmax = s.w[1];
+    el.setAttribute("role", "checkbox");
+    el.setAttribute("aria-checked", "false");
+    el.setAttribute("tabindex", "0");
+    const term = s.w[0] === s.w[1] ? s.w[0] + " нед" : s.w[0] + "-" + s.w[1] + " нед";
+    el.innerHTML =
+      '<div class="box"></div>' +
+      '<div class="stage-body"><h4>' + s.t + '</h4><p>' + s.d + '</p></div>' +
+      '<div class="stage-price"><div class="eur">' + fmt(s.p) + ' &euro;</div>' +
+      '<div class="rub">' + fmt(s.p * RATE) + ' &#8381;</div>' +
+      '<div class="term">' + term + '</div></div>';
+    list.appendChild(el);
+  });
+
+  root.appendChild(box);
+});
+
+const stages = [...document.querySelectorAll(".stage")];
+
+function toggle(el){
+  const on = !el.classList.contains("on");
+  el.classList.toggle("on", on);
+  el.setAttribute("aria-checked", String(on));
+  const proj = el.dataset.proj, idx = +el.dataset.idx;
+  stages.forEach(s => {
+    if (s.dataset.proj !== proj) return;
+    const i = +s.dataset.idx;
+    // включая поздний этап, включаем предыдущие; выключая ранний, выключаем последующие
+    if (on && i < idx && !s.classList.contains("on")){ s.classList.add("on"); s.setAttribute("aria-checked","true"); }
+    if (!on && i > idx && s.classList.contains("on")){ s.classList.remove("on"); s.setAttribute("aria-checked","false"); }
+  });
+  recalc();
+}
+
+stages.forEach(el => {
+  el.addEventListener("click", () => toggle(el));
+  el.addEventListener("keydown", e => {
+    if (e.key === " " || e.key === "Enter"){ e.preventDefault(); toggle(el); }
+  });
+});
+
+function recalc(){
+  let sum = 0, cnt = 0, wmin = 0, wmax = 0;
+  const perProj = {};
+  stages.forEach(s => {
+    if (!s.classList.contains("on")) return;
+    const p = +s.dataset.price;
+    sum += p; cnt++;
+    wmin += +s.dataset.wmin; wmax += +s.dataset.wmax;
+    perProj[s.dataset.proj] = (perProj[s.dataset.proj] || 0) + p;
+  });
+
+  document.querySelectorAll("[data-total]").forEach(el => {
+    const v = perProj[el.dataset.total];
+    el.innerHTML = v ? ('итого <b>' + fmt(v) + ' &euro;</b> / ' + fmt(v * RATE) + ' &#8381;') : "не выбрано";
+  });
+
+  document.getElementById("cnt").textContent = cnt;
+  document.getElementById("sum").innerHTML = fmt(sum) + ' &euro; <small id="sumRub">' + fmt(sum * RATE) + ' &#8381;</small>';
+  document.getElementById("term").textContent = cnt ? (wmin === wmax ? wmin + " нед" : wmin + "-" + wmax + " нед") : "—";
+  document.getElementById("bar").classList.toggle("show", cnt > 0);
+
+  const names = [];
+  stages.forEach(s => { if (s.classList.contains("on")) names.push(s.querySelector("h4").textContent + " (" + s.closest(".proj").querySelector("h3").textContent + ")"); });
+  const txt = cnt ? ("Здравствуйте! По предложению интересует: " + names.join("; ") + ". Итого " + fmt(sum) + " EUR.") : "";
+  document.getElementById("cta").href = "https://t.me/antongoloskokov" + (txt ? "?text=" + encodeURIComponent(txt) : "");
+}
+
+const io = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+}, {rootMargin:"0px 0px -8% 0px", threshold:.06});
+document.querySelectorAll(".rv").forEach((el,i) => {
+  el.style.transitionDelay = Math.min(i % 4, 3) * 60 + "ms";
+  io.observe(el);
+});
+
+recalc();
+</script>
+</body>
+</html>
