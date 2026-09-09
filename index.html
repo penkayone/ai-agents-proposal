@@ -969,12 +969,14 @@ function runTerm(){
   termRun = true;
   if (RM){ term.classList.add("run"); return; }
   lines.forEach((l, i) => setTimeout(() => l.style.cssText = "opacity:1;transform:none", 70 * i));
+  setTimeout(() => term.classList.add("run"), 70 * lines.length + 700);
 }
 
 /* ---------- 4. появление и прогресс ---------- */
-function reveal(el){
+function reveal(el, hard){
   if (el.classList.contains("in")) return;
   el.classList.add("in");
+  if (hard){ el.style.opacity = "1"; el.style.transform = "none"; }
   if (el.contains(term)) runTerm();
 }
 
@@ -995,9 +997,11 @@ if ("IntersectionObserver" in window){
   });
 
   // страховка: наблюдатель не отработал за 2.5 с, показываем страницу целиком
-  setTimeout(() => { if (!document.querySelector(".rv.in")) all.forEach(reveal); }, 2500);
+  setTimeout(() => {
+    if (!document.querySelector(".rv.in")) all.forEach(el => reveal(el, true));
+  }, 2500);
 } else {
-  all.forEach(reveal);
+  all.forEach(el => reveal(el, true));
 }
 
 const prog = document.getElementById("prog");
