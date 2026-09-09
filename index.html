@@ -9,6 +9,11 @@
 <meta name="theme-color" content="#080b11">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script>
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.documentElement.className += " js-anim";
+}
+</script>
 <noscript><style>.rv{opacity:1!important;transform:none!important}.bar i{transform:scaleX(.6)}</style></noscript>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -371,8 +376,8 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
 .fin{margin-top:30px;color:var(--fg-3);font-size:13.4px;line-height:1.75}
 
 /* ---------- reveal ---------- */
-.rv{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
-.rv.in{opacity:1;transform:none}
+.js-anim .rv{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.js-anim .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .rv{opacity:1;transform:none;transition:none}
@@ -981,28 +986,19 @@ function reveal(el, hard){
 }
 
 const all = [...document.querySelectorAll(".rv")];
-if ("IntersectionObserver" in window){
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => {
-      if (!e.isIntersecting) return;
-      reveal(e.target);
-      io.unobserve(e.target);
-    });
-  }, {rootMargin:"0px 0px -6% 0px", threshold:.08});
-  all.forEach(el => io.observe(el));
-
-  // то, что уже видно при загрузке, показываем без ожидания наблюдателя
-  requestAnimationFrame(() => {
-    all.forEach(el => { if (el.getBoundingClientRect().top < innerHeight * .96) reveal(el); });
-  });
-
-  // страховка: наблюдатель не отработал за 2.5 с, показываем страницу целиком
-  setTimeout(() => {
-    if (!document.querySelector(".rv.in")) all.forEach(el => reveal(el, true));
-  }, 2500);
-} else {
-  all.forEach(el => reveal(el, true));
+function checkReveal(){
+  const h = innerHeight;
+  for (const el of all){
+    if (el.classList.contains("in")) continue;
+    if (el.getBoundingClientRect().top < h * .94) reveal(el);
+  }
 }
+addEventListener("scroll", checkReveal, {passive:true});
+addEventListener("resize", checkReveal, {passive:true});
+addEventListener("load", checkReveal);
+checkReveal();
+setTimeout(checkReveal, 400);
+setTimeout(checkReveal, 1500);
 
 const prog = document.getElementById("prog");
 let ticking = false;
