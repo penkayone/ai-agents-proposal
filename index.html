@@ -9,6 +9,7 @@
 <meta name="theme-color" content="#080b11">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<noscript><style>.rv{opacity:1!important;transform:none!important}.bar i{transform:scaleX(.6)}</style></noscript>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
@@ -995,16 +996,34 @@ function runTerm(){
 }
 
 /* ---------- 4. появление и прогресс ---------- */
-const io = new IntersectionObserver(es => {
-  es.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add("in");
-    io.unobserve(e.target);
-    if (e.target.classList.contains("chart-card")) runChart();
-    if (e.target.contains(term)) runTerm();
+function reveal(el){
+  if (el.classList.contains("in")) return;
+  el.classList.add("in");
+  if (el.classList.contains("chart-card")) runChart();
+  if (el.contains(term)) runTerm();
+}
+
+const all = [...document.querySelectorAll(".rv")];
+if ("IntersectionObserver" in window){
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      reveal(e.target);
+      io.unobserve(e.target);
+    });
+  }, {rootMargin:"0px 0px -6% 0px", threshold:.08});
+  all.forEach(el => io.observe(el));
+
+  // то, что уже видно при загрузке, показываем без ожидания наблюдателя
+  requestAnimationFrame(() => {
+    all.forEach(el => { if (el.getBoundingClientRect().top < innerHeight * .96) reveal(el); });
   });
-}, {rootMargin:"0px 0px -6% 0px", threshold:.08});
-document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+  // страховка: наблюдатель не отработал за 2.5 с, показываем страницу целиком
+  setTimeout(() => { if (!document.querySelector(".rv.in")) all.forEach(reveal); }, 2500);
+} else {
+  all.forEach(reveal);
+}
 
 const prog = document.getElementById("prog");
 let ticking = false;
