@@ -38,7 +38,8 @@
   --ease:cubic-bezier(.22,.68,.28,1);
 }
 
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;color-scheme:dark}
+a,button,[role="checkbox"]{touch-action:manipulation;-webkit-tap-highlight-color:rgba(76,141,255,.18)}
 body{
   margin:0;background:var(--bg);color:var(--fg);
   font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -47,7 +48,8 @@ body{
 }
 img,svg,table{max-width:100%}
 h1,h2,h3,h4,p,li,td,th{overflow-wrap:break-word}
-h1,h2,h3,h4{font-family:"Space Grotesk",Inter,sans-serif;line-height:1.14;margin:0;letter-spacing:-.025em;font-weight:600}
+h1,h2,h3,h4{font-family:"Space Grotesk",Inter,sans-serif;line-height:1.14;margin:0;letter-spacing:-.025em;font-weight:600;text-wrap:balance}
+.mono,.st-p,.bar-v,.proj-sum,.hs .v,.row-t .nums,.chart-total .big{font-variant-numeric:tabular-nums}
 p{margin:0}
 a{color:var(--brand-2);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -60,7 +62,12 @@ section{padding:var(--sp) 0;position:relative}
 section+section{border-top:1px solid var(--line)}
 
 /* ---------- progress ---------- */
-.progress{position:fixed;top:0;left:0;height:2px;background:var(--brand);width:0;z-index:80;transition:width .12s linear}
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--brand);z-index:80;transform:scaleX(0);transform-origin:0 50%}
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:99;padding:12px 18px;border-radius:0 0 10px 0;
+  background:var(--brand);color:#04101f;font-weight:600;
+}
+.skip:focus{left:0;text-decoration:none}
 
 /* ---------- section head ---------- */
 .head{max-width:74ch;margin-bottom:clamp(30px,4vw,48px)}
@@ -126,7 +133,7 @@ section+section{border-top:1px solid var(--line)}
 .row-t .nums b{color:var(--brand);font-weight:500}
 .bars{display:grid;gap:7px}
 .bar{height:11px;border-radius:99px;background:var(--surface-2);overflow:hidden;position:relative}
-.bar i{display:block;height:100%;width:0;border-radius:99px;transition:width 1s var(--ease)}
+.bar i{display:block;height:100%;width:100%;border-radius:99px;transform:scaleX(0);transform-origin:0 50%;transition:transform 1s var(--ease)}
 .bar.now i{background:linear-gradient(90deg,var(--line-2),#3b4a60)}
 .bar.after i{background:linear-gradient(90deg,var(--brand),var(--brand-2));box-shadow:0 0 16px rgba(76,141,255,.45)}
 .chart-total{
@@ -264,7 +271,8 @@ section+section{border-top:1px solid var(--line)}
 .st .idx{
   font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--fg-3);
   width:24px;height:24px;display:grid;place-items:center;border:1px solid var(--line);
-  border-radius:7px;background:var(--surface);margin-top:0;flex:none;transition:all .2s var(--ease);
+  border-radius:7px;background:var(--surface);margin-top:0;flex:none;
+  transition:color .2s var(--ease),border-color .2s var(--ease);
 }
 .st.on .idx{color:var(--brand);border-color:rgba(76,141,255,.4)}
 .st-b h4{font-size:15.6px;margin-bottom:5px}
@@ -398,7 +406,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
   html{scroll-behavior:auto}
   .rv{opacity:1;transform:none;transition:none}
   .term-body .ln{opacity:1;transform:none}
-  .bar i{transition:none}
+  .bar i,.progress{transition:none}
   .pulse::after,.caret{animation:none}
   *{transition-duration:.01ms!important}
 }
@@ -406,6 +414,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
 </head>
 <body>
 
+<a class="skip" href="#main">Перейти к содержанию</a>
 <div class="progress" id="prog" aria-hidden="true"></div>
 
 <!-- ============ 1. HERO ============ -->
@@ -428,7 +437,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
 </header>
 
 <!-- ============ 2. ВРЕМЯ ============ -->
-<section>
+<section id="main" style="scroll-margin-top:24px">
   <div class="wrap">
     <div class="head rv">
       <span class="n"><b>1</b> Ради чего это делается</span>
@@ -772,7 +781,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
 <!-- ============ STICKY ============ -->
 <div class="bar-fix" id="bar">
   <div class="bar-in">
-    <div class="bar-nums">
+    <div class="bar-nums" aria-live="polite">
       <div><span class="bar-k">Блоков</span><span class="bar-v" id="bCnt">0</span></div>
       <div><span class="bar-k">Стоимость</span><span class="bar-v"><em id="bSum">0</em> <small id="bAlt"></small></span></div>
       <div><span class="bar-k">Срок</span><span class="bar-v" id="bTerm">—</span></div>
@@ -825,7 +834,7 @@ function runChart(){
   if (chartRun) return;
   chartRun = true;
   document.querySelectorAll(".bar i").forEach((el, i) => {
-    setTimeout(() => { el.style.width = el.dataset.w + "%"; }, RM ? 0 : 90 * i);
+    setTimeout(() => { el.style.transform = "scaleX(" + (el.dataset.w / 100) + ")"; }, RM ? 0 : 90 * i);
   });
   countTo(document.getElementById("tNow"), TIME.reduce((s,r)=>s+r.now,0), 900);
   countTo(document.getElementById("tAft"), TIME.reduce((s,r)=>s+r.aft,0), 900);
@@ -1004,7 +1013,7 @@ addEventListener("scroll", () => {
   ticking = true;
   requestAnimationFrame(() => {
     const h = document.documentElement.scrollHeight - innerHeight;
-    prog.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + "%";
+    prog.style.transform = "scaleX(" + (h > 0 ? scrollY / h : 0) + ")";
     ticking = false;
   });
 }, {passive:true});
