@@ -50,7 +50,7 @@ body{
 img,svg,table{max-width:100%}
 h1,h2,h3,h4,p,li,td,th{overflow-wrap:break-word}
 h1,h2,h3,h4{font-family:"Space Grotesk",Inter,sans-serif;line-height:1.14;margin:0;letter-spacing:-.025em;font-weight:600;text-wrap:balance}
-.mono,.st-p,.bar-v,.proj-sum,.hs .v,.row-t .nums,.chart-total .big{font-variant-numeric:tabular-nums}
+.mono,.st-p,.bar-v,.proj-sum,.hs .v{font-variant-numeric:tabular-nums}
 p{margin:0}
 a{color:var(--brand-2);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -114,41 +114,11 @@ section+section{border-top:1px solid var(--line)}
 .hs .v span{color:var(--brand)}
 .hs .k{font-size:13px;color:var(--fg-3);margin-top:5px}
 
-/* ---------- time chart ---------- */
-.chart-card{
-  position:relative;border:1px solid var(--line);border-radius:var(--r-lg);
-  background:radial-gradient(120% 130% at 50% 0%,var(--surface),var(--bg-soft) 70%);
-  padding:clamp(22px,3vw,34px);box-shadow:var(--shadow-lg);overflow:hidden;
-}
-.chart-card .rules{position:absolute;inset:0;display:flex;justify-content:space-between;padding:0 6%;pointer-events:none}
-.chart-card .rules i{width:1px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.045) 45%,transparent)}
-.legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:26px;position:relative}
-.lg{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--fg-2)}
-.sw{width:11px;height:11px;border-radius:3px}
-.sw.now{background:var(--line-2);border:1px solid var(--fg-3)}
-.sw.after{background:var(--brand)}
-.rows{display:grid;gap:20px;position:relative}
-.row-t{display:flex;justify-content:space-between;gap:14px;align-items:baseline;margin-bottom:9px;flex-wrap:wrap}
-.row-t span{font-size:14.6px;color:var(--fg)}
-.row-t .nums{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--fg-3);white-space:nowrap}
-.row-t .nums b{color:var(--brand);font-weight:500}
-.bars{display:grid;gap:7px}
-.bar{height:11px;border-radius:99px;background:var(--surface-2);overflow:hidden;position:relative}
-.bar i{display:block;height:100%;width:100%;border-radius:99px;transform:scaleX(0);transform-origin:0 50%;transition:transform 1s var(--ease)}
-.bar.now i{background:linear-gradient(90deg,var(--line-2),#3b4a60)}
-.bar.after i{background:linear-gradient(90deg,var(--brand),var(--brand-2));box-shadow:0 0 16px rgba(76,141,255,.45)}
-.chart-total{
-  display:flex;flex-wrap:wrap;gap:10px 26px;align-items:baseline;
-  margin-top:28px;padding-top:22px;border-top:1px solid var(--line);position:relative;
-}
-.chart-total .big{font-family:"Space Grotesk",sans-serif;font-size:clamp(24px,3.4vw,34px);font-weight:600}
-.chart-total .big em{font-style:normal;color:var(--brand)}
-.chart-total p{color:var(--fg-3);font-size:13.6px;max-width:52ch}
 
 /* ---------- cards ---------- */
 .grid{display:grid;gap:16px}
 .grid>*{min-width:0}
-.term,.term-bar,.chart-card,.rows>*{min-width:0}
+.term,.term-bar{min-width:0}
 .term-bar span{min-width:0}
 .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -407,7 +377,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
   html{scroll-behavior:auto}
   .rv{opacity:1;transform:none;transition:none}
   .term-body .ln{opacity:1;transform:none}
-  .bar i,.progress{transition:none}
+  .progress{transition:none}
   .pulse::after,.caret{animation:none}
   *{transition-duration:.01ms!important}
 }
@@ -437,32 +407,63 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
   </div>
 </header>
 
-<!-- ============ 2. ВРЕМЯ ============ -->
+<!-- ============ 2. РАЗБОР ТЗ ============ -->
 <section id="main" style="scroll-margin-top:24px">
   <div class="wrap">
     <div class="head rv">
-      <span class="n"><b>1</b> Ради чего это делается</span>
-      <h2>Куда уходит время сейчас и сколько останется</h2>
+      <span class="n"><b>1</b> Разбор задания</span>
+      <h2>Что я понял из ваших трех ТЗ</h2>
       <p>
-        Объемы взял из ваших ТЗ: 20 порталов и 200 групп для объявлений, ежедневный обход источников,
-        от 5 до 10 публикаций в сутки на три сети. Правая шкала это время на просмотр отчета
-        и подтверждение отправок, потому что решение по контакту остается за вами.
+        По каждому проекту главное, на чем он держится. Если я где-то понял вас не так,
+        поправьте до старта: на бумаге это стоит пять минут, в собранной системе неделю.
       </p>
     </div>
 
-    <div class="chart-card rv">
-      <div class="rules" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="legend">
-        <span class="lg"><span class="sw now"></span> Сейчас, руками</span>
-        <span class="lg"><span class="sw after"></span> С агентами</span>
-      </div>
+    <div class="grid g3">
+      <article class="card rv">
+        <h3>Разведчик</h3>
+        <p>
+          Пять модулей: объекты, инвесторы, агентства, переписка, разведка источников.
+          Держится он не на поиске, а на квалификации. Агент не отдает вам контакт,
+          пока не закрыт чек-лист: бюджет, география, тип объекта, форма сделки, кто принимает решение.
+          Пятый модуль важнее, чем выглядит: без него список источников устареет за месяц
+          и поток пересохнет сам собой.
+        </p>
+        <div class="chips"><span class="chip">5 модулей</span><span class="chip">чек-лист до передачи</span><span class="chip">поиск расширяется сам</span></div>
+      </article>
 
-      <div class="rows" id="rows"></div>
+      <article class="card rv">
+        <h3>Content Maker</h3>
+        <p>
+          Шесть модулей вокруг персонажа. Генерация постов это самая простая часть,
+          ее умеет любой. Ценность дает пятый модуль, разбор результатов: он ищет причину,
+          по которой пост не сработал, ставит эксперимент и меняет правила генерации.
+          Через два месяца система пишет лучше, чем в первый день. Персонаж при этом
+          остается вымышленным, а не копией живого мастера, вы это верно заложили.
+        </p>
+        <div class="chips"><span class="chip">6 модулей</span><span class="chip">петля обучения</span><span class="chip">свой персонаж</span></div>
+      </article>
 
-      <div class="chart-total">
-        <div class="big"><em id="tNow">0</em> часов в неделю &rarr; <em id="tAft">0</em></div>
-        <p>Оценка по объемам из ТЗ. Проверяется на первом блоке работ: там уже виден реальный поток и реальное время на разбор.</p>
-      </div>
+      <article class="card rv">
+        <h3>Публикатор объявлений</h3>
+        <p>
+          Одна карточка объявления, из нее версии под каждую площадку.
+          Дальше очередь с интервалами и статус по каждой попытке: размещено, ждет модерации,
+          отклонено с причиной. Второй по важности кусок это сбор откликов под объявлениями,
+          потому что человек, который написал комментарий, уже проявил интерес.
+        </p>
+        <div class="chips"><span class="chip">220 площадок</span><span class="chip">статусы модерации</span><span class="chip">сбор откликов</span></div>
+      </article>
+    </div>
+
+    <div class="card rv" style="margin-top:16px">
+      <h3>Что связывает три проекта</h3>
+      <p>
+        Под ними один фундамент: расписание, очередь задач, единая база, отчет в Telegram
+        и кнопка подтверждения перед действием. Разведчик находит объекты, публикатор их разгоняет
+        и ловит отклики, контент собирает вокруг вас аудиторию, из которой приходят те же инвесторы.
+        Поэтому второй и третий проект собираются быстрее первого: ядро уже стоит и работает.
+      </p>
     </div>
   </div>
 </section>
@@ -576,6 +577,8 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
         <div class="bi"><h4>Выгрузка всех данных</h4><p>Кнопка, которая складывает объекты, контакты и переписку в таблицу.</p></div>
         <div class="bi"><h4>Второй получатель отчета</h4><p>Подключаю помощника или партнера к тому же отчету без доплаты.</p></div>
         <div class="bi"><h4>30 дней консультаций</h4><p>Пишете вопрос по работе системы, отвечаю. Без счетчика минут.</p></div>
+        <div class="bi"><h4>Переезд на другой сервер</h4><p>Решите сменить хостинг, перенесу систему целиком один раз бесплатно.</p></div>
+        <div class="bi"><h4>Стартовый набор источников</h4><p>Соберу первый список площадок и ключевых слов по вашим странам, чтобы вам не сидеть над ним самой.</p></div>
       </div>
 
       <p class="bonus-note">Мелочи, но именно из-за них система живет, а не стоит после первой поломки.</p>
@@ -800,25 +803,7 @@ const RATE = 100;
 const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const nf = n => n.toLocaleString("ru-RU");
 
-/* ---------- 1. график времени ---------- */
-const TIME = [
-  {t:"Обход источников и отбор объектов", now:10, aft:0.5},
-  {t:"Поиск инвесторов и первая переписка", now:12, aft:1.5},
-  {t:"Размещение объявлений по площадкам", now:14, aft:1},
-  {t:"Производство и публикация контента", now:20, aft:2}
-];
-const MAXH = 20;
-const rows = document.getElementById("rows");
-TIME.forEach(r => {
-  const d = document.createElement("div");
-  d.innerHTML =
-    '<div class="row-t"><span>' + r.t + '</span>' +
-    '<span class="nums">' + r.now + ' ч &rarr; <b>' + r.aft + ' ч</b> в неделю</span></div>' +
-    '<div class="bars"><div class="bar now"><i data-w="' + (r.now/MAXH*100) + '"></i></div>' +
-    '<div class="bar after"><i data-w="' + Math.max(r.aft/MAXH*100, 1.5) + '"></i></div></div>';
-  rows.appendChild(d);
-});
-
+/* ---------- счетчики ---------- */
 function countTo(el, to, dur){
   if (RM){ el.textContent = nf(to); return; }
   const start = performance.now();
@@ -829,22 +814,10 @@ function countTo(el, to, dur){
     if (p < 1) requestAnimationFrame(step); else done = true;
   };
   requestAnimationFrame(step);
-  // если вкладка была в фоне и кадры не шли, дописываем итог
   setTimeout(() => { if (!done) el.textContent = nf(to); }, dur + 600);
 }
 
-let chartRun = false;
-function runChart(){
-  if (chartRun) return;
-  chartRun = true;
-  document.querySelectorAll(".bar i").forEach((el, i) => {
-    setTimeout(() => { el.style.transform = "scaleX(" + (el.dataset.w / 100) + ")"; }, RM ? 0 : 90 * i);
-  });
-  countTo(document.getElementById("tNow"), TIME.reduce((s,r)=>s+r.now,0), 900);
-  countTo(document.getElementById("tAft"), TIME.reduce((s,r)=>s+r.aft,0), 900);
-}
-
-/* ---------- 2. конфигуратор ---------- */
+/* ---------- конфигуратор ---------- */
 const DATA = [
   {
     id:"scout",
@@ -1002,7 +975,6 @@ function runTerm(){
 function reveal(el){
   if (el.classList.contains("in")) return;
   el.classList.add("in");
-  if (el.classList.contains("chart-card")) runChart();
   if (el.contains(term)) runTerm();
 }
 
