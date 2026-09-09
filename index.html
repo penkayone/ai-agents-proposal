@@ -822,12 +822,15 @@ TIME.forEach(r => {
 function countTo(el, to, dur){
   if (RM){ el.textContent = nf(to); return; }
   const start = performance.now();
+  let done = false;
   const step = t => {
     const p = Math.min((t - start) / dur, 1);
     el.textContent = nf(Math.round(to * (1 - Math.pow(1 - p, 3))));
-    if (p < 1) requestAnimationFrame(step);
+    if (p < 1) requestAnimationFrame(step); else done = true;
   };
   requestAnimationFrame(step);
+  // если вкладка была в фоне и кадры не шли, дописываем итог
+  setTimeout(() => { if (!done) el.textContent = nf(to); }, dur + 600);
 }
 
 let chartRun = false;
