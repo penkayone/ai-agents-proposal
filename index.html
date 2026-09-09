@@ -926,8 +926,8 @@ items.forEach(el => {
 });
 
 function repaintPrices(){
-  document.querySelectorAll("[data-p]").forEach(e => e.textContent = price(+e.dataset.p));
-  document.querySelectorAll("[data-alt]").forEach(e => e.textContent = priceAlt(+e.dataset.alt));
+  document.querySelectorAll(".st-p .a").forEach(e => e.textContent = price(+e.dataset.p));
+  document.querySelectorAll(".st-p .b").forEach(e => e.textContent = priceAlt(+e.dataset.alt));
   recalc();
 }
 
