@@ -226,7 +226,8 @@ section+section{border-top:1px solid var(--line)}
 .proj-head h3{font-size:19.5px}
 .proj-head .sub{color:var(--fg-3);font-size:13.8px;margin-top:6px;max-width:62ch}
 .proj-sum{font-family:"JetBrains Mono",monospace;font-size:13.2px;color:var(--fg-3);white-space:nowrap;text-align:right}
-.proj-sum b{color:var(--brand);font-weight:500;font-size:15px}
+.proj-sum b{color:var(--brand);font-weight:500;font-size:14.6px}
+.proj-sum s{text-decoration:none;color:var(--line-2);padding:0 3px}
 .stages{padding:8px}
 .st{
   display:grid;grid-template-columns:auto auto 1fr auto;gap:16px;align-items:start;
@@ -254,13 +255,12 @@ section+section{border-top:1px solid var(--line)}
 .st-b h4{font-size:15.6px;margin-bottom:5px}
 .st-b p{font-size:14.2px;color:var(--fg-2)}
 .st-p{text-align:right;font-family:"JetBrains Mono",monospace;white-space:nowrap}
-.st-p .a{font-size:15.6px;color:var(--fg);font-weight:500}
-.st-p .b{font-size:12.4px;color:var(--fg-3);margin-top:3px}
-.st-p .w{font-size:12.2px;color:var(--brand);margin-top:6px}
+.st-p .a{font-size:15px;color:var(--fg);font-weight:500}
+.st-p .a i{font-style:normal;color:var(--fg-3);font-weight:400}
+.st-p .a s{text-decoration:none;color:var(--line-2);padding:0 4px}
 @media(max-width:720px){
   .st{grid-template-columns:auto auto 1fr;gap:12px}
-  .st-p{grid-column:2/-1;text-align:left;display:flex;gap:14px;align-items:baseline;margin-top:9px}
-  .st-p .b,.st-p .w{margin-top:0}
+  .st-p{grid-column:2/-1;text-align:left;margin-top:9px}
 }
 
 /* ---------- bonus ---------- */
@@ -400,7 +400,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
     <h1>Три агента, которые <span class="g">собирают данные, ведут переписку и делают контент</span></h1>
     <p class="lead">
       Антон Голоскоков, инженер AI-автоматизации. Разобрал все три ваших ТЗ.
-      Ниже архитектура каждой системы, ограничения площадок, сроки и стоимость по блокам.
+      Ниже архитектура каждой системы, ограничения площадок и стоимость по блокам.
       Отметьте нужные блоки, сумма посчитается внизу экрана.
     </p>
     <div class="hero-stats">
@@ -420,7 +420,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
       <h2>Что я понял из ваших трех ТЗ</h2>
       <p>
         По каждому проекту главное, на чем он держится. Если я где-то понял вас не так,
-        поправьте до старта: на бумаге это стоит пять минут, в собранной системе неделю.
+        поправьте до старта: на бумаге это правится за пять минут, в собранной системе стоит уже дорого.
       </p>
     </div>
 
@@ -685,7 +685,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
           <tr><td><b>Instagram</b></td><td>Content Publishing API для бизнес-аккаунта: фото, карусели, Reels</td><td>Автоматически, до 50 публикаций в сутки</td></tr>
           <tr><td><b>Facebook</b></td><td>Своя Страница через Pages API. Публикация в чужие группы через официальный интерфейс закрыта с 2020 года</td><td>Свои Страницы и группы с правами администратора автоматически, остальное через вашу кнопку</td></tr>
           <tr><td><b>Telegram</b></td><td>Bot API: каналы и группы, где бот назначен администратором</td><td>Автоматически. Доступ в чужую группу дает ее админ</td></tr>
-          <tr><td><b>TikTok</b></td><td>Content Posting API, приложение проходит ревью перед запуском</td><td>Автоматически после одобрения, время на ревью заложено в блок</td></tr>
+          <tr><td><b>TikTok</b></td><td>Content Posting API, приложение проходит ревью перед запуском</td><td>Автоматически после одобрения приложения площадкой</td></tr>
           <tr><td><b>YouTube</b></td><td>Data API, суточная квота 10 000 единиц, загрузка ролика стоит 1600</td><td>До шести роликов в сутки, квота расширяется по запросу</td></tr>
           <tr><td><b>Порталы недвижимости</b></td><td>Idealista, Fotocasa, Kyero и MLS работают через API или фиды по подписке. У части площадок интерфейса нет</td><td>Где есть, автоматически. Где нет, готовый черновик и отправка в один клик</td></tr>
           <tr><td><b>Маркировка ИИ</b></td><td>Instagram, TikTok и YouTube требуют помечать синтетический контент</td><td>Ставится при загрузке, это встроенная функция площадок</td></tr>
@@ -704,7 +704,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
       <p>Три системы одновременно я вести не буду, качество упадет. Предлагаю такую очередь.</p>
     </div>
     <div class="steps">
-      <div class="step rv"><div><h4>Разведчик, первый блок</h4><p>Одна страна, три источника, база объектов, утренний отчет. Через три недели вы смотрите на живой поток и решаете, расширять или нет. Самая дешевая проверка идеи.</p></div></div>
+      <div class="step rv"><div><h4>Разведчик, первый блок</h4><p>Одна страна, три источника, база объектов, утренний отчет. Вы смотрите на живой поток и решаете, расширять или нет. Самая дешевая проверка идеи.</p></div></div>
       <div class="step rv"><div><h4>Публикатор объявлений</h4><p>Объекты уже собираются, значит их пора разгонять по площадкам и ловить входящие. Работает на том же ядре, поэтому собирается быстрее.</p></div></div>
       <div class="step rv"><div><h4>Content Maker</h4><p>Самый длинный проект, и он ждет ваших решений: персонаж, права на материалы, аудитория. Пока идут первые два, эти вопросы закрываются без простоя.</p></div></div>
     </div>
@@ -781,7 +781,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
       </div>
       <p class="fin">
         Антон Голоскоков, инженер AI-автоматизации.<br>
-        Предложение действует 30 дней с 9 сентября 2026. Сроки указаны при полной занятости на проекте.
+        Предложение действует 30 дней с 9 сентября 2026.
       </p>
     </div>
   </div>
@@ -792,8 +792,7 @@ footer{padding:var(--sp) 0 132px;border-top:1px solid var(--line)}
   <div class="bar-in">
     <div class="bar-nums" aria-live="polite">
       <div><span class="bar-k">Блоков</span><span class="bar-v" id="bCnt">0</span></div>
-      <div><span class="bar-k">Стоимость</span><span class="bar-v"><em id="bSum">0</em> <small id="bAlt"></small></span></div>
-      <div><span class="bar-k">Срок</span><span class="bar-v" id="bTerm">—</span></div>
+      <div><span class="bar-k">Стоимость</span><span class="bar-v"><em id="bSum">0</em></span></div>
     </div>
     <a class="btn" id="bCta" href="https://t.me/antongoloskokov" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
@@ -829,11 +828,11 @@ const DATA = [
     name:"Разведчик: объекты и инвесторы",
     sub:"Поиск объектов и инвесторов, квалификация в переписке, расширение источников",
     stages:[
-      {t:"Рабочий минимум", d:"Одна страна, три источника объектов, дедупликация и оценка по вашим критериям, база объектов, утренний отчет в Telegram. Без автоматической переписки.", p:290, w:[3,4]},
-      {t:"Инвесторы и агентства", d:"Поиск инвесторов, покупателей и брокеров, карточки с источником и датой, сбор баз агентств по городам, совпадения объект-инвестор по смыслу.", p:270, w:[3,4]},
-      {t:"Переписка и квалификация", d:"Диалог по сценарию, чек-листы по инвестору и по объекту, подтверждение отправки вашей кнопкой, встречи сразу в Google Calendar.", p:310, w:[4,4]},
-      {t:"Разведка источников", d:"Список наблюдения за людьми, разбор комментариев под их постами, поиск новых групп, платформ и агентств, подключение одобренных источников без программиста.", p:240, w:[3,3]},
-      {t:"Масштабирование", d:"Новые страны и языки, аналитика по источникам: какая группа и какой человек приносят сделки, а какие висят мертвым грузом. Объем уточняем после первых блоков.", p:180, w:[2,4]}
+      {t:"Рабочий минимум", d:"Одна страна, три источника объектов, дедупликация и оценка по вашим критериям, база объектов, утренний отчет в Telegram. Без автоматической переписки.", p:290},
+      {t:"Инвесторы и агентства", d:"Поиск инвесторов, покупателей и брокеров, карточки с источником и датой, сбор баз агентств по городам, совпадения объект-инвестор по смыслу.", p:270},
+      {t:"Переписка и квалификация", d:"Диалог по сценарию, чек-листы по инвестору и по объекту, подтверждение отправки вашей кнопкой, встречи сразу в Google Calendar.", p:310},
+      {t:"Разведка источников", d:"Список наблюдения за людьми, разбор комментариев под их постами, поиск новых групп, платформ и агентств, подключение одобренных источников без программиста.", p:240},
+      {t:"Масштабирование", d:"Новые страны и языки, аналитика по источникам: какая группа и какой человек приносят сделки, а какие висят мертвым грузом. Объем уточняем после первых блоков.", p:180}
     ]
   },
   {
@@ -841,11 +840,11 @@ const DATA = [
     name:"Content Maker: цифровой персонаж",
     sub:"Контент-фабрика на Instagram, TikTok и YouTube с разбором результатов",
     stages:[
-      {t:"Персонаж и библиотека", d:"Библия персонажа, аватар и голос, загрузка первых материалов, расшифровка и разбор на тезисы, метафоры и практики. Первые публикации выходят руками для калибровки.", p:220, w:[2,3]},
-      {t:"Разведка и генерация", d:"Наблюдение за аккаунтами ниши, поиск постов-выбросов и разбор причины, банк рабочих приемов, генератор с 3-5 вариантами на одну идею.", p:290, w:[3,4]},
-      {t:"Автопубликация", d:"Официальные API трех сетей, расписание по активности аудитории, очередь на неделю вперед, режим предпросмотра по каждой рубрике.", p:220, w:[2,3]},
-      {t:"Разбор результатов", d:"Метрики через 24 и 72 часа, сравнение с медианой канала, гипотезы по ступеням воронки, эксперименты и автоматическое обновление правил генерации.", p:270, w:[3,4]},
-      {t:"Масштабирование", d:"Второй язык, второй персонаж, путь от подписчика к клиенту. Объем уточняем после разбора первых результатов.", p:160, w:[2,4]}
+      {t:"Персонаж и библиотека", d:"Библия персонажа, аватар и голос, загрузка первых материалов, расшифровка и разбор на тезисы, метафоры и практики. Первые публикации выходят руками для калибровки.", p:220},
+      {t:"Разведка и генерация", d:"Наблюдение за аккаунтами ниши, поиск постов-выбросов и разбор причины, банк рабочих приемов, генератор с 3-5 вариантами на одну идею.", p:290},
+      {t:"Автопубликация", d:"Официальные API трех сетей, расписание по активности аудитории, очередь на неделю вперед, режим предпросмотра по каждой рубрике.", p:220},
+      {t:"Разбор результатов", d:"Метрики через 24 и 72 часа, сравнение с медианой канала, гипотезы по ступеням воронки, эксперименты и автоматическое обновление правил генерации.", p:270},
+      {t:"Масштабирование", d:"Второй язык, второй персонаж, путь от подписчика к клиенту. Объем уточняем после разбора первых результатов.", p:160}
     ]
   },
   {
@@ -853,16 +852,17 @@ const DATA = [
     name:"Публикатор объявлений",
     sub:"Размещение по базе площадок, контроль модерации, ежедневный отчет",
     stages:[
-      {t:"База площадок и ядро", d:"Одна карточка объявления, адаптация под формат каждой площадки, очередь с интервалами, адаптеры под порталы, Telegram и подключенные аккаунты.", p:220, w:[2,3]},
-      {t:"Контроль и учет", d:"Статус по каждой попытке: размещено, на модерации, отклонено с причиной, ошибка. Учет всех публикаций, сбор реакций и откликов под объявлениями.", p:160, w:[2,2]},
-      {t:"Новые группы и отчет", d:"Ежедневный поиск новых тематических сообществ по ключевым словам, отбор по активности, рекомендация вступить или пропустить, утренняя сводка.", p:130, w:[1,2]}
+      {t:"База площадок и ядро", d:"Одна карточка объявления, адаптация под формат каждой площадки, очередь с интервалами, адаптеры под порталы, Telegram и подключенные аккаунты.", p:220},
+      {t:"Контроль и учет", d:"Статус по каждой попытке: размещено, на модерации, отклонено с причиной, ошибка. Учет всех публикаций, сбор реакций и откликов под объявлениями.", p:160},
+      {t:"Новые группы и отчет", d:"Ежедневный поиск новых тематических сообществ по ключевым словам, отбор по активности, рекомендация вступить или пропустить, утренняя сводка.", p:130}
     ]
   }
 ];
 
 let CUR = "eur";
-const price = p => CUR === "eur" ? nf(p) + " €" : nf(p * RATE) + " ₽";
-const priceAlt = p => CUR === "eur" ? nf(p * RATE) + " ₽" : nf(p) + " €";
+const pair = p => CUR === "eur"
+  ? nf(p) + " €<s>/</s><i>" + nf(p * RATE) + " ₽</i>"
+  : nf(p * RATE) + " ₽<s>/</s><i>" + nf(p) + " €</i>";
 
 const cfg = document.getElementById("cfg");
 DATA.forEach(proj => {
@@ -876,19 +876,15 @@ DATA.forEach(proj => {
     const el = document.createElement("div");
     el.className = "st";
     el.dataset.proj = proj.id; el.dataset.i = i; el.dataset.p = s.p;
-    el.dataset.wa = s.w[0]; el.dataset.wb = s.w[1];
     el.setAttribute("role","checkbox");
     el.setAttribute("aria-checked","false");
     el.setAttribute("tabindex","0");
     el.setAttribute("aria-label", s.t + ", " + s.p + " евро");
-    const w = s.w[0] === s.w[1] ? s.w[0] + " нед" : s.w[0] + "-" + s.w[1] + " нед";
     el.innerHTML =
       '<span class="box"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5.5 11.5l3.6 3.6 7.4-8"/></svg></span>' +
       '<span class="idx mono">' + (i + 1) + '</span>' +
       '<span class="st-b"><h4>' + s.t + '</h4><p>' + s.d + '</p></span>' +
-      '<span class="st-p"><span class="a" data-p="' + s.p + '">' + price(s.p) + '</span>' +
-      '<span class="b" data-alt="' + s.p + '">' + priceAlt(s.p) + '</span>' +
-      '<span class="w">' + w + '</span></span>';
+      '<span class="st-p"><span class="a" data-p="' + s.p + '">' + pair(s.p) + '</span></span>';
     list.appendChild(el);
   });
   cfg.appendChild(box);
@@ -917,28 +913,25 @@ items.forEach(el => {
 });
 
 function repaintPrices(){
-  document.querySelectorAll(".st-p .a").forEach(e => e.textContent = price(+e.dataset.p));
-  document.querySelectorAll(".st-p .b").forEach(e => e.textContent = priceAlt(+e.dataset.alt));
+  document.querySelectorAll(".st-p .a").forEach(e => e.innerHTML = pair(+e.dataset.p));
   recalc();
 }
 
 function recalc(){
-  let sum = 0, cnt = 0, wa = 0, wb = 0;
+  let sum = 0, cnt = 0;
   const per = {};
   items.forEach(s => {
     if (!s.classList.contains("on")) return;
     const p = +s.dataset.p;
-    sum += p; cnt++; wa += +s.dataset.wa; wb += +s.dataset.wb;
+    sum += p; cnt++;
     per[s.dataset.proj] = (per[s.dataset.proj] || 0) + p;
   });
   document.querySelectorAll("[data-sum]").forEach(el => {
     const v = per[el.dataset.sum];
-    el.innerHTML = v ? ("итого <b>" + price(v) + "</b><br>" + priceAlt(v)) : "не выбрано";
+    el.innerHTML = v ? ("итого <b>" + pair(v) + "</b>") : "не выбрано";
   });
   document.getElementById("bCnt").textContent = cnt;
-  document.getElementById("bSum").textContent = price(sum);
-  document.getElementById("bAlt").textContent = cnt ? priceAlt(sum) : "";
-  document.getElementById("bTerm").textContent = cnt ? (wa === wb ? wa + " нед" : wa + "-" + wb + " нед") : "—";
+  document.getElementById("bSum").innerHTML = pair(sum);
   document.getElementById("bar").classList.toggle("on", cnt > 0);
 
   const picked = items.filter(s => s.classList.contains("on"))
