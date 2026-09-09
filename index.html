@@ -1023,15 +1023,8 @@ if (!RM && matchMedia("(hover:hover)").matches){
   });
 }
 
-/* счетчики в шапке */
-const hs = new IntersectionObserver(es => {
-  es.forEach(e => {
-    if (!e.isIntersecting) return;
-    countTo(e.target, +e.target.dataset.count, 1000);
-    hs.unobserve(e.target);
-  });
-}, {threshold:.4});
-document.querySelectorAll("[data-count]").forEach(el => hs.observe(el));
+/* счетчики в шапке: они на первом экране, запускаем сразу */
+document.querySelectorAll("[data-count]").forEach(el => countTo(el, +el.dataset.count, 1000));
 
 recalc();
 </script>
