@@ -996,9 +996,12 @@ function checkReveal(){
 addEventListener("scroll", checkReveal, {passive:true});
 addEventListener("resize", checkReveal, {passive:true});
 addEventListener("load", checkReveal);
+addEventListener("focus", checkReveal);
+addEventListener("visibilitychange", checkReveal);
 checkReveal();
-setTimeout(checkReveal, 400);
-setTimeout(checkReveal, 1500);
+// вкладка могла открыться в фоне: там события прокрутки не приходят, поэтому первые секунды опрашиваем сами
+let ticks = 0;
+const iv = setInterval(() => { checkReveal(); if (++ticks > 24) clearInterval(iv); }, 500);
 
 const prog = document.getElementById("prog");
 let ticking = false;
